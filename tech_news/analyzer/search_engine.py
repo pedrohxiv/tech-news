@@ -30,7 +30,13 @@ def search_by_date(date):
         raise ValueError('Data inválida')
 
 
-# Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    query = {"category": {"$regex": category, "$options": "i"}}
+    result = search_news(query)
+
+    search = []
+
+    for item in result:
+        search.append((item['title'], item['url']))
+
+    return search
