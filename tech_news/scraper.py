@@ -1,5 +1,6 @@
 import requests
 import time
+from parsel import Selector
 
 
 def fetch(url):
@@ -17,10 +18,9 @@ def fetch(url):
         time.sleep(1)
 
 
-# Requisito 2
 def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
-    raise NotImplementedError
+    selector = Selector(text=html_content)
+    return selector.css('.entry-title a::attr(href)').getall()
 
 
 # Requisito 3
